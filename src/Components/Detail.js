@@ -6,7 +6,7 @@ export function Detail(){
     return (
         <div className="details">
             <img src= {data.url} alt={data.title} />
-            <h1> {data.name}</h1>
+            <h1> {data.title}</h1>
             <p>selected:{data.quantity}</p>
         </div>
     )

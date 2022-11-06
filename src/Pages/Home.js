@@ -1,12 +1,10 @@
 import {Card} from '../Components/Card'
 import { Link } from 'react-router-dom';
 import CartContext from '../Contexts/CartContext'
-import React, { useState,useEffect } from 'react';
-import axios from "axios";
+import React, { useState } from 'react';
 
 export function  Home() {
     const [books, setBookState] = useState(Books);
-    const [mems, setMeme] = useState([])
     const [totalItems, setCartState] = useState(0)
     
     const removeBooks = (event,book) => {
@@ -26,16 +24,6 @@ export function  Home() {
         setCartState(totalItems + 1);
 
     }
-    // const fetchData = () => {
-    //     return axios.get("https://api.imgflip.com/get_memes")
-    //           .then((response) => {
-    //             console.log(response.data.data.memes)
-    //             setMeme(response.data.data.memes)
-    //           } );
-    //   }
-    //   useEffect(() => {
-    //     fetchData();
-    //   },[])
 
     return (
         <div>       
