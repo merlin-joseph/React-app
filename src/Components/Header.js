@@ -1,13 +1,15 @@
 
 import React, { useContext } from "react";
-import CartContext from '../Contexts/CartContext'
+import {CartContext} from '../Contexts/CartContext'
 
 export function Header(){
-    const value = useContext(CartContext);
+    // const value = useContext(CartContext);
+    const [cartDetails] = useContext(CartContext);
+
 
     return (
         <header>
-            <p>{value}</p>
+            <p>{cartDetails}</p>
         </header>
     )
 }

@@ -3,10 +3,12 @@ import { Routes, Route,BrowserRouter } from "react-router-dom"
 import {Home} from './Pages/Home'
 import {Header} from './Components/Header'
 import {Detail} from './Components/Detail'
+import {CartDetailsProvider} from './Contexts/CartContext'
 
 function App() {
   return (
     <div className="App">
+      <CartDetailsProvider>
       <Header />
       <BrowserRouter>
       <Routes>
@@ -14,6 +16,7 @@ function App() {
         <Route path="/detail/:id" name="detail" element={ <Detail/> } />
       </Routes>
       </BrowserRouter>
+      </CartDetailsProvider>
     </div>
   );
 }
