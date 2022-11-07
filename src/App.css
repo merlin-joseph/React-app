@@ -4,6 +4,12 @@ body{
 .d-flex{
   display: flex;
 }
+.justify-between{
+  justify-content: space-between;
+}
+ .mr-10{
+  margin-right: 10px;
+ }
 .text-center{
   text-align: center;
 }
@@ -41,7 +47,6 @@ h4{
 .button-wrapper{
   margin-top: 25px;
   text-align: right;
-  justify-content: space-between;
   align-items: center;
 }
 button{
@@ -84,4 +89,12 @@ header p {
 }
 h1 {
   margin: 0 20px 0 0;
+}
+
+.genre{
+  padding: 5px 10px;
+    background: #7149ab;
+    display: inline-block;
+    color: #fff;
+    border-radius: 4px;
 }

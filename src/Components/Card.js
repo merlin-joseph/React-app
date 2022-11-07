@@ -8,7 +8,7 @@ export function  Card({book, addBooks, removeBooks}) {
             <img src= {book.url} alt={book.name}/>
             <h4>{book.name}</h4>
             </div>
-            <div className="button-wrapper d-flex">
+            <div className="button-wrapper d-flex justify-between">
             <p className="qty">Quantity: {book.quantity}</p>
             <div>
                 <button onClick={(event) => addBooks(event,book)}>+</button>

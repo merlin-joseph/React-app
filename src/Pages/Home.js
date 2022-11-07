@@ -15,11 +15,11 @@ export function  Home() {
     
     const removeBooks = (event,book) => {
         event.preventDefault();
-        let updatedBook = books.findIndex((b) =>  b.id === book.id);
+        let updatedBook = Books.findIndex((b) =>  b.id === book.id);
         if(Books[updatedBook].quantity){
             Books[updatedBook].quantity--
-            setBooks([...books]);
-            setCartDetails(cartDetails-1);
+            setBooks([...Books]);
+            setCartDetails(cartDetails - 1);
         }
        
 
@@ -36,7 +36,10 @@ export function  Home() {
 
     useEffect(() => {
         axios.get(baseURL).then((response) => {
-            setBooks(response.data.data);
+            let books = response.data.data;
+            let cart = books.reduce((cart, book) => {return cart+book.quantity},0);
+            setCartDetails(cart);
+            setBooks(books);
         }).catch (error =>  console.log(error))
       }, []);
 
