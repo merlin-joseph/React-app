@@ -10,15 +10,15 @@ function App() {
   return (
     <div className="App">
       <CartDetailsProvider>
-      <Header />
-      <BooksProvider>
-      <BrowserRouter>
-      <Routes>
-        <Route path="/" element={ <Home/> } />
-        <Route path="/detail/:id" name="detail" element={ <Detail/> } />
-      </Routes>
-      </BrowserRouter>
-      </BooksProvider>
+        <Header />
+        <BooksProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={ <Home/> } />
+              <Route path="/detail/:id" name="detail" element={ <Detail/> } />
+            </Routes>
+          </BrowserRouter>
+        </BooksProvider>
       </CartDetailsProvider>
     </div>
   );

@@ -10,10 +10,8 @@ const baseURL = "https://localhost:7266/api/Course";
 export function Detail(){
     // const location = useLocation();
     // const data = location.state?.data;
-
     const params = useParams();
     const bookId = params.id;
-
      // const [Books, setBooks] = useContext(BooksContext);
     // let book = Books.find((book) => book.id == bookId);
 
@@ -51,29 +49,27 @@ export function Detail(){
         }).catch (error =>  console.log(error))
       }, []);
 
-
     if(book){
-        return (
-            <div className="details d-flex">
-            <Link to = "/">Back</Link>
-               
-                <div>
-                    <img src= {book.url} alt={book.name} />
-                </div>
-                <div>
-                    <h1> {book.name}</h1>
-                    <p className="genre">{book.genre}</p>
-                    <p>{book.description}</p>
-                    <div className="button-wrapper d-flex">
-            <p className="qty mr-10">Quantity: {book.quantity}</p>
-            <div>
+      return (
+        <div className="details d-flex">
+          <Link to = "/">Back</Link>
+          <div>
+              <img src= {book.url} alt={book.name} />
+          </div>
+          <div>
+            <h1> {book.name}</h1>
+            <p className="genre">{book.genre}</p>
+            <p>{book.description}</p>
+            <div className="button-wrapper d-flex">
+              <p className="qty mr-10">Quantity: {book.quantity}</p>
+              <div>
                 <button onClick={addBooks} >+</button>
                 <button onClick = {removeBooks}>-</button>
-                </div>
+              </div>
             </div>
-                </div>
-            </div>
-        )
+          </div>
+        </div>
+      )
     }
     else {
         return (
