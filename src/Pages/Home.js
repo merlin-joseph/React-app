@@ -15,32 +15,44 @@ export function  Home() {
     
     const removeBooks = (event,book) => {
         event.preventDefault();
-        let updatedBook = Books.findIndex((b) =>  b.id === book.id);
-        if(Books[updatedBook].quantity){
-            Books[updatedBook].quantity--
-            setBooks([...Books]);
-            setCartDetails(cartDetails - 1);
-        }
-       
+        let id = Books.findIndex((b) =>  b.id === book.id);
+        if(Books[id].quantity){
+            let data = {...book, quantity: book.quantity-1}
+              //update selected book - put
+            axios.put(baseURL, data ).then((response) => {
+                let book = response.data.data;
+                setCartDetails(cartDetails - 1);
+                  // fetch list api - get
+                getAllBooks();
+            }).catch (error =>  console.log(error))
 
-        
+        }
     }
+
     const addBooks = (event,book)=>{
         event.preventDefault();
-        let updatedBook = Books.findIndex((b) =>  b.id === book.id )
-        Books[updatedBook].quantity++
-        setBooks([ ...Books]);
-        setCartDetails(cartDetails + 1);
-
+        let data = {...book, quantity: book.quantity+1}
+        //update selected book - put
+        axios.put(baseURL, data ).then((response) => {
+            let book = response.data.data;
+            setCartDetails(cartDetails + 1);
+            // fetch list api - get
+            getAllBooks();
+        }).catch (error =>  console.log(error))
     }
 
-    useEffect(() => {
+    const getAllBooks = () =>{
         axios.get(baseURL).then((response) => {
             let books = response.data.data;
             let cart = books.reduce((cart, book) => {return cart+book.quantity},0);
             setCartDetails(cart);
             setBooks(books);
         }).catch (error =>  console.log(error))
+    }
+    
+
+    useEffect(() => {
+        getAllBooks();
       }, []);
 
     return (
