@@ -1,37 +1,51 @@
 import {Card} from '../Components/Card'
 import { Link } from 'react-router-dom';
 import {CartContext} from '../Contexts/CartContext'
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState,useEffect } from 'react';
+import axios from "axios";
+import { BooksContext} from '../Contexts/BooksContext';
+
+const baseURL = "https://localhost:7266/api/Course";
 
 export function  Home() {
-    const [books, setBookState] = useState(Books);
+    const [books, setBookState] = useState([]);
     const [cartDetails, setCartDetails] = useContext(CartContext);
-console.log(cartDetails)
+    const [Books, setBooks] = useContext(BooksContext);
+
     
     const removeBooks = (event,book) => {
         event.preventDefault();
         let updatedBook = books.findIndex((b) =>  b.id === book.id);
-        books[updatedBook].quantity--
-        setBookState([...books]);
-        setCartDetails(cartDetails-1);
+        if(Books[updatedBook].quantity){
+            Books[updatedBook].quantity--
+            setBooks([...books]);
+            setCartDetails(cartDetails-1);
+        }
+       
 
         
     }
     const addBooks = (event,book)=>{
         event.preventDefault();
-        let updatedBook = books.findIndex((b) =>  b.id === book.id )
-        books[updatedBook].quantity++
-        setBookState([ ...books]);
+        let updatedBook = Books.findIndex((b) =>  b.id === book.id )
+        Books[updatedBook].quantity++
+        setBooks([ ...Books]);
         setCartDetails(cartDetails + 1);
 
     }
 
+    useEffect(() => {
+        axios.get(baseURL).then((response) => {
+            setBooks(response.data.data);
+        }).catch (error =>  console.log(error))
+      }, []);
+
     return (
         <div>       
             <div className="d-flex list">
-                {books.map((book)=>{
+                {Books.map((book)=>{
                 return  (
-                 <Link to={`/detail/${book.id}`} state={{data:book}}>
+                 <Link to={`/detail/${book.id}`} state={{data:book}} key={book.id}>
                      <Card  book={book} removeBooks = {removeBooks}  addBooks= {addBooks}  />
                 </Link>
                 )
@@ -40,28 +54,3 @@ console.log(cartDetails)
         </div>
     );
 }
-const Books = [
-{
-    id:1,
-    title : 'The secret',
-    quantity: 0,
-    url : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEqrd3Tw-4NWekjpApMRIRxlrGLa8UPCFhRw&usqp=CAU'
-},
-{
-    id:2,
-    title : 'It Starts with Us',
-    quantity: 0,
-    url : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5CVLei4RDVsE7hJoge-VRZ8RBQgYUvkySMw&usqp=CAU'
-},
-{
-    id:3,
-    title:'Atomi Habits',
-    quantity: 0,
-    url : 'https://assets2.cbsnewsstatic.com/hub/i/2021/10/21/6ab6b381-fb6d-480d-a5a7-1e1af08b9077/atomic-habits.jpg'
-},
-{
-    title:'The Hobbit',
-    quantity: 0,
-    url : 'https://bestlifeonline.com/wp-content/uploads/sites/3/2020/10/The-Hobbit-book-cover.jpg'
-}
-];

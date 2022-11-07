@@ -4,10 +4,14 @@ export function Detail(){
     const location = useLocation();
     const data = location.state?.data;
     return (
-        <div className="details">
-            <img src= {data.url} alt={data.title} />
-            <h1> {data.title}</h1>
-            <p>selected:{data.quantity}</p>
+        <div className="details d-flex">
+            <div>
+            <img src= {data.url} alt={data.name} />
+            </div>
+            <div>
+            <h1> {data.name}</h1>
+            <p>{data.description}</p>
+            </div>
         </div>
     )
 }
