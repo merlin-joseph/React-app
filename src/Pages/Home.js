@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import React, { useContext, useState,useEffect } from 'react';
+import React, { useContext,useEffect } from 'react';
 import axios from "axios";
 import {Card} from '../Components/Card'
 import { BooksContext} from '../Contexts/BooksContext';
@@ -9,7 +9,7 @@ import {CartContext} from '../Contexts/CartContext'
 const baseURL = "https://localhost:7266/api/Course";
 
 export function  Home() {
-  const [books, setBookState] = useState([]);
+  // const [books, setBookState] = useState([]);
   const [cartDetails, setCartDetails] = useContext(CartContext);
   const [Books, setBooks] = useContext(BooksContext);
 
@@ -20,7 +20,6 @@ export function  Home() {
       let data = {...book, quantity: book.quantity-1}
         //update selected book - put
       axios.put(baseURL, data ).then((response) => {
-        let book = response.data.data;
         setCartDetails(cartDetails - 1);
           // fetch list api - get
         getAllBooks();
@@ -32,7 +31,6 @@ export function  Home() {
     let data = {...book, quantity: book.quantity+1}
     //update selected book - put
     axios.put(baseURL, data ).then((response) => {
-      let book = response.data.data;
       setCartDetails(cartDetails + 1);
       // fetch list api - get
       getAllBooks();
@@ -50,7 +48,7 @@ export function  Home() {
     
   useEffect(() => {
     getAllBooks();
-  }, []);
+  });
 
   return (
     <div>       

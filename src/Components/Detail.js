@@ -47,7 +47,7 @@ export function Detail(){
             let book = response.data.data;
             setBook(book);
         }).catch (error =>  console.log(error))
-      }, []);
+      });
 
     if(book){
       return (

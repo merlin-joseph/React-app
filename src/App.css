@@ -1,11 +1,19 @@
+html{
+  min-height: 100%;
+}
 body{
+  min-height: 100%;
   padding: 20px;
+  box-sizing: border-box;
 }
 .d-flex{
   display: flex;
 }
 .justify-between{
   justify-content: space-between;
+}
+.text-purple{
+  color: #7149ab;
 }
  .mr-10{
   margin-right: 10px;
@@ -97,4 +105,23 @@ h1 {
     display: inline-block;
     color: #fff;
     border-radius: 4px;
+}
+
+
+.login-wrapper{
+  min-height: calc(100vh - 250px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.login-wrapper .card{
+  width: 300px;
+  box-shadow: 0px -5px 12px 7px rgba(227,223,227,1);
+
+}
+.login-wrapper input {
+  margin-bottom: 10px;
+  height: 20px;
+  padding: 5px 10px;
 }
